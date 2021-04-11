@@ -12,6 +12,33 @@
 
 <div>
     <?php
+// sorting by text
+    function sort_text_yes($a,$b){
+        if ($a->reviewFullText!= "" && $b->reviewFullText==""){return -1;}
+        else if ($a->reviewFullText== "" && $b->reviewFullText!="") {return 1;}
+        else {return 0;}
+    }
+
+// sorting by dates
+    function sort_date_new($a,$b){
+        return strcmp($a->reviewCreatedOnDate, $b->reviewCreatedOnDate);
+    }
+    function sort_date_old($a,$b){
+        return !strcmp($a->reviewCreatedOnDate, $b->reviewCreatedOnDate);
+    }
+
+// sorting by rating
+    function sort_rating_highest($a,$b){
+        if ($a->rating > $b->rating){return -1;}
+        else if ($a->rating < $b->rating) {return 1;}
+        else {return 0;}
+    }
+    function sort_rating_lowest($a,$b){
+        if ($a->rating < $b->rating){return -1;}
+        else if ($a->rating > $b->rating) {return 1;}
+        else {return 0;}
+    }
+
 
     require "Review.php";
 
@@ -63,18 +90,41 @@
     for($i=0;$i<count($reviews);$i++)
     {
         if($reviews[$i]->rating >= $minimumR){
-            echo $reviews[$i]->rating;
+            //echo $reviews[$i]->rating;
             array_push($rated,$reviews[$i]);
         }
     }
 
+    if($date=="oldest") {
+        usort($rated,"sort_date_old");
+    }else {
+        usort($rated,"sort_date_new");
+    }
 
+    if($byRating=="highest"){
+        usort($rated,"sort_rating_highest");
+    }else{
+        usort($rated,"sort_rating_lowest");
+    }
+
+    if($text=="yes"){
+        usort($rated,"sort_text_yes");
+    }
+
+    for($i=0;$i<count($rated);$i++)
+    {
+        echo $rated[$i]->rating ;
+        echo $rated[$i]->reviewFullText ;
+        echo $rated[$i]->reviewCreatedOnDate;
+        echo "<br>";
+    }
     //echo $r->id;
     //var_dump($array);
     ?>
 
 
-</div>
 
+
+</div>
 </body>
 </html>
