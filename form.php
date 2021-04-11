@@ -4,27 +4,27 @@
         width: 70%;
         margin: auto;
     }
-     select {
+    select {
         width: 100%;
-         padding: 15px 10px;
-         margin: 8px 0;
+        padding: 15px 10px;
+        margin: 8px 0;
         display: inline-block;
         border: 1px solid #ccc;
-         border-radius: 4px;
-         box-sizing: border-box;
+        border-radius: 4px;
+        box-sizing: border-box;
     }
-     input[type=submit] {
-         background-color: dodgerblue;
-         border-radius: 4px;
-         border-color: dodgerblue;
-     }
+    input[type=submit] {
+        background-color: dodgerblue;
+        border-radius: 4px;
+        border-color: dodgerblue;
+    }
 </style>
 <body>
 
 <div>
     <h1>Filter Reviews</h1>
 
-    <form > <!--action="/action_page.php"-->
+    <form action="challenge.php" method="post"> <!--action="/action_page.php"-->
         <label for="rating">Order by rating:</label>
         <select id="rating" name="orderByRating">
             <option value="highest">Highest first</option>

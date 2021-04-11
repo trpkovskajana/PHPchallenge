@@ -2,17 +2,14 @@
 <body>
 
 <h1>Welcome to my home page!</h1>
-<p>Some text.</p>
-<p>Some more text.</p>
 
-<?php
-$data = file_get_contents("reviews.json");
-echo $data;//= json_decode($data, true);
-foreach($data as $row)
-{
-
-}
-?>
+<div>
+    Welcome
+    Order by rating : <?php echo $_POST["orderByRating"]; ?>
+    minimum Rating: <?php echo $_POST["minimumRating"]; ?>
+    order by date: <?php echo $_POST["orderByDate"]; ?>
+    priotize by text: <?php echo $_POST["prioritizeByText"]; ?>
+</div>
 
 </body>
 </html>
