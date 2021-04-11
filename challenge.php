@@ -4,10 +4,10 @@
 <h1>Filters</h1>
 
 <div>
-    <?php $byRating = $_POST["orderByRating"]; echo $byRating; ?>
-    <?php $minimumR = $_POST["minimumRating"]; echo $minimumR; ?>
-    <?php $date = $_POST["orderByDate"]; echo $date; ?>
-    <?php $text = $_POST["prioritizeByText"]; echo $text ?>
+    <?php $byRating = $_POST["orderByRating"]; ?>
+    <?php $minimumR = $_POST["minimumRating"]; ?>
+    <?php $date = $_POST["orderByDate"]; ?>
+    <?php $text = $_POST["prioritizeByText"]; ?>
 </div>
 
 <div>
@@ -58,6 +58,16 @@
         //echo $r->id . "<br>";
         array_push($reviews,$r);
     }
+
+    $rated = array();
+    for($i=0;$i<count($reviews);$i++)
+    {
+        if($reviews[$i]->rating >= $minimumR){
+            echo $reviews[$i]->rating;
+            array_push($rated,$reviews[$i]);
+        }
+    }
+
 
     //echo $r->id;
     //var_dump($array);
