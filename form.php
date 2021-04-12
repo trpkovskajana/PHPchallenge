@@ -24,7 +24,7 @@
 <div>
     <h1>Filter Reviews</h1>
 
-    <form action="challenge.php" method="post"> <!--action="/action_page.php"-->
+    <form action="challenge.php" method="post">
         <label for="rating">Order by rating:</label>
         <select id="rating" name="orderByRating">
             <option value="highest">Highest first</option>
@@ -49,7 +49,7 @@
             <option value="no">No</option>
         </select>
 
-        <input  type="submit"> <!--//onclick="alert('Hello World!')"-->
+        <input  type="submit">
     </form>
 </div>
 </body>

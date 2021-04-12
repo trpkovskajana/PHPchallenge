@@ -1,16 +1,19 @@
 <html>
+<style>
+    div {
+        width: 70%;
+        margin: auto;
+    }
+</style>
 <body>
 
-<h1>Filters</h1>
+<?php $byRating = $_POST["orderByRating"]; ?>
+<?php $minimumR = $_POST["minimumRating"]; ?>
+<?php $date = $_POST["orderByDate"]; ?>
+<?php $text = $_POST["prioritizeByText"]; ?>
 
 <div>
-    <?php $byRating = $_POST["orderByRating"]; ?>
-    <?php $minimumR = $_POST["minimumRating"]; ?>
-    <?php $date = $_POST["orderByDate"]; ?>
-    <?php $text = $_POST["prioritizeByText"]; ?>
-</div>
-
-<div>
+    <h1>Filtered reviews</h1>
     <?php
 // sorting by text
     function sort_text_yes($a,$b){
@@ -21,10 +24,10 @@
 
 // sorting by dates
     function sort_date_new($a,$b){
-        return strcmp($a->reviewCreatedOnDate, $b->reviewCreatedOnDate);
+        return strcmp($b->reviewCreatedOnDate, $a->reviewCreatedOnDate);
     }
     function sort_date_old($a,$b){
-        return !strcmp($a->reviewCreatedOnDate, $b->reviewCreatedOnDate);
+        return strcmp($a->reviewCreatedOnDate, $b->reviewCreatedOnDate);
     }
 
 // sorting by rating
@@ -42,13 +45,14 @@
 
     require "Review.php";
 
-
+// getting the data from json file
     $Json = file_get_contents('C:\Users\Admin\PhpstormProjects\untitled\reviews.json',true);
 
     $str = str_replace("\xEF\xBB\xBF",'',$Json);
 
     $array = json_decode($str);
 
+// making the array of reviews (objects)
     $reviews = array();
 
     for($i=0;$i<count($array);$i++)
@@ -82,19 +86,19 @@
         $r->sourceType = $obj->sourceType;
         $r->tags = $obj->tags;
 
-        //echo $r->id . "<br>";
         array_push($reviews,$r);
     }
 
+// filtering by ratings
     $rated = array();
     for($i=0;$i<count($reviews);$i++)
     {
         if($reviews[$i]->rating >= $minimumR){
-            //echo $reviews[$i]->rating;
             array_push($rated,$reviews[$i]);
         }
     }
 
+// sorting by all the filters
     if($date=="oldest") {
         usort($rated,"sort_date_old");
     }else {
@@ -111,19 +115,12 @@
         usort($rated,"sort_text_yes");
     }
 
+//printing of all the reviews
     for($i=0;$i<count($rated);$i++)
     {
-        echo $rated[$i]->rating ;
-        echo $rated[$i]->reviewFullText ;
-        echo $rated[$i]->reviewCreatedOnDate;
-        echo "<br>";
+        echo $rated[$i];
     }
-    //echo $r->id;
-    //var_dump($array);
     ?>
-
-
-
 
 </div>
 </body>

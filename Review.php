@@ -1,6 +1,5 @@
 <?php
 
-
 class Review
 {
     public $id =0;
@@ -12,8 +11,8 @@ class Review
     public $numShares = 0;
     public $rating =0;
     public $reviewCreatedOn="";
-    public $reviewCreatedOnDate="";//"reviewCreatedOnDate": "2021-01-25T13:00:35+00:00",
-    public $reviewCreatedOnTime= 0; //  $timestamp = 1394003958; echo(date("F d, Y h:i:s", $timestamp));
+    public $reviewCreatedOnDate="";
+    public $reviewCreatedOnTime= 0;
     public $reviewerId=null;
     public $reviewerUrl = null;
     public $reviewerName = "";
@@ -27,4 +26,8 @@ class Review
     public $href= null;
     public $logoHref=null;
     public $photos= [];
+
+    public function __toString() {
+        return "Rating : $this->rating" ."<br>"." Text : $this->reviewFullText"."<br>"." Date of creation : $this->reviewCreatedOnDate"."<br><br>" ;
+    }
 }
